@@ -6,7 +6,8 @@ const fetchBook = async (string) => {
         )}`
     );
     const data = await response.json();
-    return data.items;
+    const books = data.items;
+    return books;
 };
 
 export default fetchBook;

@@ -4,11 +4,15 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import { useState } from "react";
 const App = () => {
     const [searchTerm, setSearchTerm] = useState("");
+    const [bookModal, setBookModal] = useState("");
 
     const handleSubmit = (string) => {
         setSearchTerm(string);
     };
-    console.log(searchTerm);
+
+    const showBookModal = (book) => {
+        setBookModal(book);
+    };
 
     return (
         <>
@@ -17,8 +21,11 @@ const App = () => {
                 <SearchBar onSubmit={handleSubmit} />
             </header>
             <main>
-                <CardList />
-                <Modal />
+                <CardList
+                    searchTerm={searchTerm}
+                    setBookModal={showBookModal}
+                />
+                <Modal bookModal={bookModal} />
             </main>
             <footer> </footer>
         </>

@@ -1,7 +1,14 @@
 import React from "react";
 
-const CardFront = (props) => {
-    return <div></div>;
+const CardFront = ({ title, authors, description, imageLinks }) => {
+    return (
+        <div>
+            <h2>{title}</h2>
+            <h4>{authors.join(", ")}</h4>
+            <p>{description}</p>
+            <img src={imageLinks.thumbnail} alt="" />
+        </div>
+    );
 };
 
 export default CardFront;
