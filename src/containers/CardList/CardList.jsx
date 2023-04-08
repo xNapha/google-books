@@ -16,7 +16,13 @@ const CardList = ({ showBookModal, searchTerm }) => {
         <div>
             {bookList
                 ? bookList.map((book) => {
-                      return <Card key={book.id} info={book} />;
+                      return (
+                          <Card
+                              key={book.id}
+                              book={book}
+                              showBookModal={showBookModal}
+                          />
+                      );
                   })
                 : "no"}
         </div>

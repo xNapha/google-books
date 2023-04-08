@@ -23,7 +23,7 @@ const App = () => {
             <main>
                 <CardList
                     searchTerm={searchTerm}
-                    setBookModal={showBookModal}
+                    showBookModal={showBookModal}
                 />
                 <Modal bookModal={bookModal} />
             </main>
