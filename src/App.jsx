@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import CardList from "./containers/CardList/CardList";
+import Modal from "./components/Modal/Modal";
+import SearchBar from "./components/SearchBar/SearchBar";
+import { useState } from "react";
+const App = () => {
+    const [searchTerm, setSearchTerm] = useState("");
 
-function App() {
-  const [count, setCount] = useState(0)
+    const handleSubmit = (string) => {
+        setSearchTerm(string);
+    };
+    console.log(searchTerm);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    return (
+        <>
+            <header>
+                <img src="" alt="Google Books" />
+                <SearchBar onSubmit={handleSubmit} />
+            </header>
+            <main>
+                <CardList />
+                <Modal />
+            </main>
+            <footer> </footer>
+        </>
+    );
+};
 
-export default App
+export default App;
