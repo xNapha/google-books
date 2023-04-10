@@ -1,13 +1,12 @@
-const fetchBook = async (string) => {
+const fetchBook = async (string, maxResults) => {
     const response = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=${string.replace(
             /\s/g,
             "+"
-        )}`
+        )}&maxResults=${maxResults}`
     );
     const data = await response.json();
-    const books = data.items;
-    return books;
+    return data;
 };
 
 export default fetchBook;

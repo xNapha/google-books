@@ -1,12 +1,12 @@
 import React from "react";
-import CardCategory from "../CardCategory/CardCategory";
+import { renderArray } from "../../services/renderArrays";
 import { useState } from "react";
 
 const CardBack = ({
-    publisher = "empty",
+    description,
+    publisher,
     publishedDate,
     categories,
-    maturityRating,
     showBookModal,
     book,
 }) => {
@@ -21,14 +21,19 @@ const CardBack = ({
             <p>Published Date: {publishedDate}</p>
             <section>
                 <p>Categories: </p>
-                <ul>
-                    <li>{categories}</li>
-                </ul>
+                <ul>{renderArray(categories)}</ul>
             </section>
-            <p> Maturity Rating: {maturityRating}</p>
+            <p>{description}</p>
             <button onClick={handleClick}>More Information</button>
         </div>
     );
 };
 
 export default CardBack;
+
+CardBack.defaultProps = {
+    publisher: "NO KNOWN PUBLISHER",
+    publishedDate: "NO KNOWN PUBLISHED DATE",
+    categories: "NO KNOWN CATEGORY",
+    description: "NO KNOWN DESCRIPTION",
+};

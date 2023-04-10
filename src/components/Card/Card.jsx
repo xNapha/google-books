@@ -13,14 +13,14 @@ const Card = ({ book, showBookModal }) => {
         maturityRating,
     } = book.volumeInfo;
     return (
-        <div>
+        <>
             <CardFront
                 title={title}
                 authors={authors}
-                description={description}
                 imageLinks={imageLinks}
             />
             <CardBack
+                description={description}
                 publisher={publisher}
                 publishedDate={publishedDate}
                 categories={categories}
@@ -28,7 +28,7 @@ const Card = ({ book, showBookModal }) => {
                 showBookModal={showBookModal}
                 book={book}
             />
-        </div>
+        </>
     );
 };
 

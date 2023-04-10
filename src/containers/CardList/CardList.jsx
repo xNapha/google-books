@@ -3,30 +3,32 @@ import Card from "../../components/Card/Card";
 import fetchBook from "../../services/fetchBook.js";
 import { useState, useEffect } from "react";
 
-const CardList = ({ showBookModal, searchTerm }) => {
+const CardList = ({ showBookModal, searchTerm, getNumOfItems }) => {
     const [bookList, setBookList] = useState([]);
 
+    const getInformation = (data) => {
+        getNumOfItems(data.totalItems);
+        return data.items;
+    };
+
     useEffect(() => {
-        fetchBook(searchTerm)
-            .then((book) => setBookList(book))
+        fetchBook(searchTerm, 40)
+            .then(getInformation)
+            .then(setBookList)
             .catch((error) => console.log(error));
     }, [searchTerm]);
 
-    return (
-        <div>
-            {bookList
-                ? bookList.map((book) => {
-                      return (
-                          <Card
-                              key={book.id}
-                              book={book}
-                              showBookModal={showBookModal}
-                          />
-                      );
-                  })
-                : "no"}
-        </div>
-    );
+    const renderBookList = (bookList) => {
+        if (!bookList)
+            return `I couldn't find any books with the search term ${searchTerm}, please try again`;
+        return bookList.map((book) => {
+            return (
+                <Card key={book.id} book={book} showBookModal={showBookModal} />
+            );
+        });
+    };
+
+    return <>{renderBookList(bookList)}</>;
 };
 
 export default CardList;
