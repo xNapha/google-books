@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-
-const SearchBar = (props) => {
-    const { onSubmit } = props;
+import React, { useContext, useState } from "react";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
+import { useNavigate } from "react-router-dom";
+const SearchBar = () => {
+    const { searchTerm, setSearchTerm } = useContext(SearchQueryContext);
     const [search, setSearch] = useState("");
-
-    const handleChange = (e) => {
-        e.preventDefault();
-        setSearch(e.target.value);
-    };
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(search);
-        setSearch("");
+        setSearchTerm(search);
+        navigate(`/books/${search.replace(/[\s]/g, "+")}`);
+    };
+
+    const handleChange = (e) => {
+        setSearch(e.target.value);
     };
     return (
-        <div>
-            <form action="" onSubmit={handleSubmit}>
-                <input type="text" onChange={handleChange} value={search} />
-            </form>
-        </div>
+        <form onSubmit={handleSubmit} onChange={handleChange}>
+            <input type="text" value={search} />
+        </form>
     );
 };
 

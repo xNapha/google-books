@@ -1,35 +1,39 @@
-import React from "react";
-import CardBack from "../CardBack/CardBack";
-import CardFront from "../CardFront/CardFront";
-const Card = ({ book, showBookModal }) => {
-    const {
-        title,
-        authors,
-        description,
-        imageLinks,
-        publisher,
-        publishedDate,
-        categories,
-        maturityRating,
-    } = book.volumeInfo;
+import React, { useContext, useEffect } from "react";
+import List from "../List/List";
+import styles from "./Card.module.scss";
+import { NavLink } from "react-router-dom";
+import { BookContext } from "../../contexts/BookProvider";
+
+const Card = ({ title, authors, image, book }) => {
+    const { setBook } = useContext(BookContext);
+    const listAuthors = authors.map((author, index) => (
+        <List key={index}>{author}</List>
+    ));
+    useEffect(() => {
+        setBook(book);
+    }, []);
     return (
-        <>
-            <CardFront
-                title={title}
-                authors={authors}
-                imageLinks={imageLinks}
-            />
-            <CardBack
-                description={description}
-                publisher={publisher}
-                publishedDate={publishedDate}
-                categories={categories}
-                maturityRating={maturityRating}
-                showBookModal={showBookModal}
-                book={book}
-            />
-        </>
+        <NavLink to={`/book/${title.split(" ").join("+")}`}>
+            <div className={styles.Card}>
+                <img src={image} alt={title} className={styles["Card-image"]} />
+                <div className={styles["Card-description"]}>
+                    <h3 className={styles["Card-description-title"]}>
+                        {title}
+                    </h3>
+                    <h4 className={styles["Card-description-authors"]}>
+                        Authors:
+                    </h4>
+                    <ul className={styles["Card-description-list"]}>
+                        {listAuthors}
+                    </ul>
+                </div>
+            </div>
+        </NavLink>
     );
 };
 
 export default Card;
+
+Card.defaultProps = {
+    image: "No",
+};

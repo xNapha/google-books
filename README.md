@@ -53,14 +53,10 @@ Steps:
 
 Components needed:
     1. Card
-        - houses the front and back of the card
-    2. FrontCard
         - basic details and image
-    3. BackCard
-        - more basic information that couldnt fit on the front
-    4. CardModal
+    2. CardModal
         - all the specific details fo the book
-    5. SearchBar
+    3. SearchBar
         - used by the user to find specific books
 
 

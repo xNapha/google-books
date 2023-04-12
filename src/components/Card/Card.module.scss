@@ -1,0 +1,40 @@
+.Card {
+    border: 1px solid black;
+    width: 25vw;
+    max-width: 400px;
+    height: 450px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    > * {
+        color: black;
+    }
+
+    &-image {
+        position: relative;
+        z-index: -1;
+        height: 350px;
+        width: 25vw;
+        border-radius: 20px 20px 0px 0px;
+        max-width: 400px;
+    }
+    &-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 0px 0px 20px 20px;
+        height: 100px;
+        &-list {
+            overflow: auto;
+            height: 60px;
+            width: 100%;
+            text-align: left;
+            list-style: disc;
+            padding-left: 20px;
+        }
+    }
+}

@@ -1,34 +1,32 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
+import fetchBook from "../../services/fetchBook";
 import Card from "../../components/Card/Card";
-import fetchBook from "../../services/fetchBook.js";
-import { useState, useEffect } from "react";
+import NavigationBar from "../../components/NavigationBar/NavigationBar";
+import styles from "./CardList.module.scss";
+import LoadMore from "../../components/LoadMore/LoadMore";
 
-const CardList = ({ showBookModal, searchTerm, getNumOfItems }) => {
-    const [bookList, setBookList] = useState([]);
-
-    const getInformation = (data) => {
-        getNumOfItems(data.totalItems);
-        return data.items;
+const CardList = ({ bookSearch }) => {
+    const removeDuplicateBooks = (array) => {
+        return array.reduce((acc, curr) => {
+            if (!acc.find((book) => book.id === curr.id)) {
+                acc.push(curr);
+            }
+            return acc;
+        }, []);
     };
 
-    useEffect(() => {
-        fetchBook(searchTerm, 40)
-            .then(getInformation)
-            .then(setBookList)
-            .catch((error) => console.log(error));
-    }, [searchTerm]);
+    const createContent = removeDuplicateBooks(bookSearch)?.map((book) => (
+        <Card
+            key={book.id}
+            title={book.volumeInfo?.title ?? ""}
+            authors={book.volumeInfo?.authors ?? []}
+            image={book.volumeInfo.imageLinks?.thumbnail ?? ""}
+            book={book}
+        />
+    ));
 
-    const renderBookList = (bookList) => {
-        if (!bookList)
-            return `I couldn't find any books with the search term ${searchTerm}, please try again`;
-        return bookList.map((book) => {
-            return (
-                <Card key={book.id} book={book} showBookModal={showBookModal} />
-            );
-        });
-    };
-
-    return <>{renderBookList(bookList)}</>;
+    return <section className={styles.Card_List}>{createContent}</section>;
 };
 
 export default CardList;
