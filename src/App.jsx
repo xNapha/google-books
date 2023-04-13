@@ -1,21 +1,13 @@
-import React, { useContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./containers/HomePage/HomePage";
 import SearchPage from "./containers/SearchPage/SearchPage";
-import DedicatedBook from "./containers/DedicatedBook/DedicatedBook";
-import { BookContext } from "./contexts/BookProvider";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
-
+import NotFound from "./containers/NotFound/NotFound";
 const App = () => {
-    const { book } = useContext(BookContext);
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/books/:search" element={<SearchPage />} />
-            <Route
-                path="/book/:title"
-                element={<DedicatedBook book={book} />}
-            />
+            <Route path="/:search" element={<SearchPage />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 };

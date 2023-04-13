@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import List from "../List/List";
 import styles from "./Card.module.scss";
-import { NavLink } from "react-router-dom";
 import { BookContext } from "../../contexts/BookProvider";
 
 const Card = ({ title, authors, image, book }) => {
@@ -9,31 +8,36 @@ const Card = ({ title, authors, image, book }) => {
     const listAuthors = authors.map((author, index) => (
         <List key={index}>{author}</List>
     ));
-    useEffect(() => {
-        setBook(book);
-    }, []);
+
+    const longTitle =
+        title.length > 35 ? `${title.substring(0, 35)}...` : title;
     return (
-        <NavLink to={`/book/${title.split(" ").join("+")}`}>
-            <div className={styles.Card}>
-                <img src={image} alt={title} className={styles["Card-image"]} />
-                <div className={styles["Card-description"]}>
-                    <h3 className={styles["Card-description-title"]}>
-                        {title}
-                    </h3>
-                    <h4 className={styles["Card-description-authors"]}>
-                        Authors:
-                    </h4>
-                    <ul className={styles["Card-description-list"]}>
-                        {listAuthors}
-                    </ul>
-                </div>
+        <div
+            className={styles.Card}
+            onClick={() => {
+                setBook(book);
+            }}
+        >
+            <img
+                src={image || DEFAULTS.image}
+                alt={title}
+                className={styles["Card-image"]}
+            />
+            <div className={styles["Card-description"]}>
+                <h3 className={styles["Card-description-title"]}>
+                    {longTitle}
+                </h3>
+                <h4 className={styles["Card-description-authors"]}>Authors:</h4>
+                <ul className={styles["Card-description-list"]}>
+                    {listAuthors}
+                </ul>
             </div>
-        </NavLink>
+        </div>
     );
 };
 
 export default Card;
 
-Card.defaultProps = {
-    image: "No",
+const DEFAULTS = {
+    image: "../src/assets/default_book.jpg",
 };

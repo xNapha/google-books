@@ -1,30 +1,43 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
-import fetchBook from "../../services/fetchBook";
-import Card from "../../components/Card/Card";
+import { initialSearch } from "../../services/fetchBook";
 import NavigationBar from "../../components/NavigationBar/NavigationBar";
-import LoadMore from "../../components/LoadMore/LoadMore";
 import CardList from "../CardList/CardList";
+import DedicatedBook from "../DedicatedBook/DedicatedBook";
+import { BookContext } from "../../contexts/BookProvider";
+import { useParams, useNavigate } from "react-router-dom";
+
 const SearchPage = () => {
-    const { searchTerm } = useContext(SearchQueryContext);
-    const [totalBooks, setTotalBooks] = useState(0);
-    const [bookSearch, setBookSearch] = useState([]);
+    const { book } = useContext(BookContext);
+    const {
+        searchTerm,
+        bookSearch,
+        setBookSearch,
+        loading,
+        setLoading,
+        setSearchTerm,
+    } = useContext(SearchQueryContext);
+    const { search } = useParams();
+    const navigate = useNavigate();
+
     useEffect(() => {
-        fetchBook(searchTerm, setBookSearch, setTotalBooks);
-    }, [searchTerm]);
+        navigate(`/${search.replace(/\s/g, "+")}`);
+        setLoading(true);
+        initialSearch(search, bookSearch, setBookSearch, setLoading);
+    }, [searchTerm, search]);
+
+    const mainContent = (
+        <main>
+            <CardList />
+            {book && <DedicatedBook book={book} />}
+        </main>
+    );
     return (
         <>
             <header>
                 <NavigationBar />
             </header>
-            <main>
-                <p>Total book count of {totalBooks ?? 0}</p>
-                <CardList bookSearch={bookSearch} />
-            </main>
-            <footer>
-                <LoadMore></LoadMore>
-                <LoadMore></LoadMore>
-            </footer>
+            {loading ? <p>Loading...</p> : mainContent}
         </>
     );
 };

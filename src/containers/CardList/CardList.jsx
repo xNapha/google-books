@@ -1,20 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
-import fetchBook from "../../services/fetchBook";
 import Card from "../../components/Card/Card";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import styles from "./CardList.module.scss";
 import LoadMore from "../../components/LoadMore/LoadMore";
+import removeDuplicateBooks from "../../services/removeDuplicateBooks";
 
-const CardList = ({ bookSearch }) => {
-    const removeDuplicateBooks = (array) => {
-        return array.reduce((acc, curr) => {
-            if (!acc.find((book) => book.id === curr.id)) {
-                acc.push(curr);
-            }
-            return acc;
-        }, []);
-    };
+const CardList = () => {
+    const { bookSearch } = useContext(SearchQueryContext);
 
     const createContent = removeDuplicateBooks(bookSearch)?.map((book) => (
         <Card
@@ -26,7 +18,12 @@ const CardList = ({ bookSearch }) => {
         />
     ));
 
-    return <section className={styles.Card_List}>{createContent}</section>;
+    return (
+        <>
+            <section className={styles.Card_List}>{createContent}</section>
+            {bookSearch > 0 ? "" : <LoadMore />}
+        </>
+    );
 };
 
 export default CardList;
