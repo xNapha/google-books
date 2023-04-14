@@ -5,12 +5,15 @@ import "./index.css";
 import SearchQueryProvider from "./contexts/SearchQueryProvider";
 import BookProvider from "./contexts/BookProvider";
 import { BrowserRouter } from "react-router-dom";
+import FavouritesProvider from "./contexts/FavouritesProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <BookProvider>
             <SearchQueryProvider>
-                <App />
+                <FavouritesProvider>
+                    <App />
+                </FavouritesProvider>
             </SearchQueryProvider>
         </BookProvider>
     </BrowserRouter>

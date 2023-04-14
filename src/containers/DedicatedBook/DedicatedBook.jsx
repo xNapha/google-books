@@ -2,11 +2,17 @@ import React, { useContext } from "react";
 import List from "../../components/List/List";
 import styles from "./DedicatedBook.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
+import { FavouritesContext } from "../../contexts/FavouritesProvider";
 
 const DedicatedBook = () => {
     const { book, setBook } = useContext(BookContext);
+    const { favourites, setFavourites } = useContext(FavouritesContext);
     const { volumeInfo } = book;
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        setFavourites([...favourites, book]);
+    };
     return (
         <div className={styles.Dedicated_Book}>
             <div className={styles.Dedicated_Book_info}>
@@ -69,7 +75,9 @@ const DedicatedBook = () => {
                             </p>
                         </div>
                     </main>
-                    <footer className={styles["book-text_footer"]}></footer>
+                    <footer className={styles["book-text_footer"]}>
+                        <button onClick={handleClick}>Favourite</button>
+                    </footer>
                 </section>
             </div>
         </div>

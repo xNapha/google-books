@@ -21,6 +21,7 @@ const SearchPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        setSearchTerm(search);
         navigate(`/${search.replace(/\s/g, "+")}`);
         setLoading(true);
         initialSearch(search, bookSearch, setBookSearch, setLoading);

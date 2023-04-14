@@ -7,6 +7,7 @@ const fetchBook = async (searchTerm, startIndex = "0") => {
         )}&maxResults=${maxResults}&startIndex=${startIndex}`
     );
     const data = await response.json();
+    console.log(data);
     return data;
 };
 

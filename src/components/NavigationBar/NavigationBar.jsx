@@ -7,6 +7,7 @@ const NavigationBar = () => {
         <>
             <NavLink to="/">Google Books</NavLink>
             <SearchBar />
+            <NavLink to="/favourites/">Favourites</NavLink>
         </>
     );
 };
