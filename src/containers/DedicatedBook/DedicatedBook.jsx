@@ -3,6 +3,12 @@ import List from "../../components/List/List";
 import styles from "./DedicatedBook.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
 import { FavouritesContext } from "../../contexts/FavouritesProvider";
+import { useState } from "react";
+import {
+    addToFavourites,
+    checkFavourites,
+    deleteFromFavourites,
+} from "../../services/favourites";
 
 const DedicatedBook = () => {
     const { book, setBook } = useContext(BookContext);
@@ -11,7 +17,7 @@ const DedicatedBook = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        setFavourites([...favourites, book]);
+        checkFavourites(favourites, setFavourites, book);
     };
     return (
         <div className={styles.Dedicated_Book}>
@@ -40,17 +46,16 @@ const DedicatedBook = () => {
                         <div className={styles["book-text_main-author"]}>
                             <h3>Authors:</h3>
                             <ul>
-                                {volumeInfo?.authors?.map((author) => (
-                                    <List>{author}</List>
+                                {volumeInfo?.authors?.map((author, index) => (
+                                    <List key={index}>{author}</List>
                                 )) ?? BOOKDEFAULTS.authors}
                             </ul>
                         </div>
                         <div className={styles["book-text_main-category"]}>
                             <h3>Category:</h3>
                             <ul>
-                                {volumeInfo?.categories?.map((category) => (
-                                    <List>{category}</List>
-                                )) ?? BOOKDEFAULTS.categories}
+                                {<List>{volumeInfo?.categories}</List> ??
+                                    BOOKDEFAULTS.categories}
                             </ul>
                         </div>
                         <div className={styles["book-text_main-description"]}>
@@ -76,7 +81,9 @@ const DedicatedBook = () => {
                         </div>
                     </main>
                     <footer className={styles["book-text_footer"]}>
-                        <button onClick={handleClick}>Favourite</button>
+                        <button onClick={handleClick}>
+                            {book.favourite ? "Unfavourite" : "Favourite"}
+                        </button>
                     </footer>
                 </section>
             </div>

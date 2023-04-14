@@ -8,15 +8,18 @@ import removeDuplicateBooks from "../../services/removeDuplicateBooks";
 const CardList = () => {
     const { bookSearch } = useContext(SearchQueryContext);
 
-    const createContent = removeDuplicateBooks(bookSearch)?.map((book) => (
-        <Card
-            key={book.id}
-            title={book.volumeInfo?.title ?? ""}
-            authors={book.volumeInfo?.authors ?? []}
-            image={book.volumeInfo.imageLinks?.thumbnail ?? ""}
-            book={book}
-        />
-    ));
+    const createContent = removeDuplicateBooks(bookSearch)?.map((book) => {
+        book.favourite = false;
+        return (
+            <Card
+                key={book.id}
+                title={book.volumeInfo?.title ?? ""}
+                authors={book.volumeInfo?.authors ?? []}
+                image={book.volumeInfo.imageLinks?.thumbnail ?? ""}
+                book={book}
+            />
+        );
+    });
 
     return (
         <>
