@@ -1,44 +1,42 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Dedicated_Book {
+    @include mixins.displayFlex(row, center, center);
     position: fixed;
-    z-index: 2;
+    z-index: variables.$dedicated-card-z-index;
     top: 0;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     height: 100vh;
     width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     &_info {
-        background-color: #454545;
-        width: 1000px;
-        height: 700px;
+        background-color: variables.$secondary-background-color;
+        width: calc(2 * variables.$dedicated-card-image-width);
+        height: variables.$dedicated-card-image-height;
         display: grid;
-        border-radius: 20px;
+        border-radius: variables.$card-border-radius;
         grid-template-columns: 1fr 1fr;
-        z-index: 2;
+        z-index: variables.$dedicated-card-z-index;
     }
 }
 .book-image {
-    height: 700px;
-    width: 500px;
-    border-radius: 20px 0px 0px 20px;
+    height: variables.$dedicated-card-image-height;
+    width: variables.$dedicated-card-image-width;
+    border-top-left-radius: variables.$card-border-radius;
+    border-bottom-left-radius: variables.$card-border-radius;
 }
 .book-text {
     display: grid;
-    grid-template-columns: 1fr;
     grid-template-rows: 1fr 8fr 1fr;
     overflow: auto;
     padding-left: 5px;
     &_header {
-        display: flex;
+        @include mixins.displayFlex(row, space-between, center);
         padding-top: 10px;
         padding-right: 10px;
-        justify-content: space-between;
-        align-items: center;
         width: 100%;
         &-title {
-            width: 370px;
+            width: calc(variables.$dedicated-card-image-width - 130px);
             text-decoration: underline;
             &-normal {
                 font-size: 2.5rem;
@@ -56,38 +54,23 @@
 
         &-favourite:hover {
             cursor: pointer;
-            filter: invert(60%) sepia(98%) saturate(23%) hue-rotate(314deg)
-                brightness(86%) contrast(84%);
+            filter: variables.$secondary-svg-color;
         }
         &-favourite {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
-            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg)
-                brightness(103%) contrast(103%);
+            @include mixins.dedicatedCardIcons();
         }
         &-exit {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            font-size: 10px;
-            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg)
-                brightness(103%) contrast(103%);
+            @include mixins.dedicatedCardIcons();
         }
         &-exit:hover {
             cursor: pointer;
-            filter: invert(60%) sepia(98%) saturate(23%) hue-rotate(314deg)
-                brightness(86%) contrast(84%);
+            filter: variables.$secondary-svg-color;
         }
     }
     &_main {
-        display: flex;
-        flex-direction: column;
-        height: 630px;
-        width: 480px;
+        @include mixins.displayFlex(column);
+        height: calc(variables.$dedicated-card-image-height - 70px);
+        width: calc(variables.$dedicated-card-image-width - 20px);
         overflow: auto;
         padding-top: 20px;
         > * {

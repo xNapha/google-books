@@ -1,25 +1,13 @@
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(359deg);
-    }
-}
+@use "../../variables.module";
+@use "../../mixins..module";
+@include mixins.rotation();
 
 .Search_Page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
+    @include mixins.displayFlex(column, center, center);
+    margin-top: variables.$header-height;
     z-index: -1;
-    background-color: #363636;
+    background-color: variables.$primary-background-color;
     &-loading {
-        height: 100%;
-        width: 50px;
-        animation: rotation 2s infinite linear;
-        filter: invert(100%) sepia(6%) saturate(27%) hue-rotate(289deg)
-            brightness(108%) contrast(100%);
+        @include mixins.loadingImage();
     }
 }

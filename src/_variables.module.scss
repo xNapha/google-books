@@ -1,0 +1,30 @@
+$primary-background-color: #3b3b3b;
+$secondary-background-color: #454545;
+
+$primary-border-color: #ffffff;
+
+$primary-svg-color: (
+    invert(100%) sepia(6%) saturate(27%) hue-rotate(289deg) brightness(108%)
+        contrast(100%)
+);
+$secondary-svg-color: (
+    invert(60%) sepia(98%) saturate(23%) hue-rotate(314deg) brightness(86%)
+        contrast(84%)
+);
+
+$card-width: 200px;
+$card-height: 300px;
+$card-border-radius: 20px;
+$card-margin: 10px;
+$card-information-width: 180px;
+
+$header-height: 100px;
+
+$normal-font-size: 20px;
+
+$loading-image-width: 50px;
+
+$dedicated-card-header-icon-width: 40px;
+$dedicated-card-image-width: 500px;
+$dedicated-card-image-height: 700px;
+$dedicated-card-z-index: 2;

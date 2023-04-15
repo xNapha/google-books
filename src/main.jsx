@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css";
+import "./index.module.scss";
 import SearchQueryProvider from "./contexts/SearchQueryProvider";
 import BookProvider from "./contexts/BookProvider";
 import { BrowserRouter } from "react-router-dom";

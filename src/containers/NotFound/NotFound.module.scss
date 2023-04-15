@@ -1,7 +1,7 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Not_Found {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include mixins.displayFlex(row, center, center);
     margin-top: 200px;
     p {
         font-size: 20px;

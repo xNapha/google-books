@@ -1,17 +1,9 @@
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(359deg);
-    }
-}
+@use "../../variables.module";
+@use "../../mixins..module";
+@include mixins.rotation();
 .Load_More {
-    height: 100px;
+    height: variables.$header-height;
     img {
-        width: 50px;
-        animation: rotation 2s infinite linear;
-        filter: invert(100%) sepia(6%) saturate(27%) hue-rotate(289deg)
-            brightness(108%) contrast(100%);
+        @include mixins.loadingImage();
     }
 }

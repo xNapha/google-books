@@ -21,9 +21,10 @@ const Favourites = () => {
             return (
                 <Card
                     key={filteredBook.id}
-                    title={filteredBook.volumeInfo?.title ?? ""}
-                    authors={filteredBook.volumeInfo?.authors ?? []}
-                    image={filteredBook.volumeInfo.imageLinks?.thumbnail ?? ""}
+                    title={filteredBook.volumeInfo.title}
+                    authors={filteredBook.volumeInfo.authors}
+                    image={filteredBook.volumeInfo.imageLinks.thumbnail}
+                    description={filteredBook.volumeInfo.description}
                     book={filteredBook}
                 />
             );

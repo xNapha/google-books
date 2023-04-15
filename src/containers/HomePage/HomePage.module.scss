@@ -1,35 +1,32 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Home_Page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include mixins.displayFlex(column, center, center);
     width: 100vw;
     height: 100vh;
     gap: 40px;
-    background-color: #454545;
+    background-color: variables.$secondary-background-color;
     &-logo {
         width: 400px;
     }
     &-search {
         &-buttons {
-            display: flex;
-            height: 2rem;
-            justify-content: center;
-            align-items: center;
+            @include mixins.displayFlex(row, center, center);
             margin: 30px;
             button {
-                height: 2rem;
                 padding: 0 10px;
                 font-size: 14px;
+                height: 2rem;
                 border-radius: 5px;
                 margin: 0px 20px;
                 border: 0px;
-                background-color: #454545;
-                border: 1px solid white;
-                color: white;
+                background-color: variables.$secondary-background-color;
+                border: 1px solid variables.$primary-border-color;
+                color: variables.$primary-border-color;
             }
             button:hover {
                 cursor: pointer;
+                background-color: variables.$primary-background-color;
             }
         }
     }

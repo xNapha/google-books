@@ -1,8 +1,8 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3b3b3b;
+    @include mixins.displayFlex(row, center, center);
+    background-color: variables.$primary-background-color;
     position: fixed;
     bottom: 0;
     width: 100%;

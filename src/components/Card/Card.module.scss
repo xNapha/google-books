@@ -1,39 +1,33 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Card {
-    width: 200px;
-    height: 300px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    margin: 10px;
+    width: variables.$card-width;
+    height: variables.$card-height;
+    border-radius: variables.$card-border-radius;
+    @include mixins.displayFlex(column, end);
+    margin: variables.$card-margin;
     box-shadow: 5px 5px 5px black;
-    > * {
-        color: black;
-    }
     &-image {
         position: absolute;
-        z-index: 0;
-        height: 300px;
-        width: 200px;
-        border-radius: 20px;
+        height: variables.$card-height;
+        width: variables.$card-width;
+        border-radius: variables.$card-border-radius;
     }
     &-information {
-        display: flex;
-        flex-direction: column;
+        @include mixins.displayFlex(column);
+        height: variables.$card-height;
+        border-radius: variables.$card-border-radius;
         gap: 7px;
         background-color: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(5px);
-        height: 300px;
-        border-radius: 20px;
         > * {
-            color: white;
-            margin-left: 10px;
+            margin-left: variables.$card-margin;
         }
         &-title {
-            margin-top: 10px;
-            font-size: 20px;
+            margin-top: variables.$card-margin;
+            font-size: variables.$normal-font-size;
             height: 30px;
-            width: 180px;
+            width: variables.$card-information-width;
         }
         &-author {
             width: 100%;
@@ -41,10 +35,10 @@
         }
         &-description {
             overflow: auto;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: variables.$card-border-radius;
+            border-bottom-right-radius: variables.$card-border-radius;
             padding-bottom: 10px;
-            width: 180px;
+            width: variables.$card-information-width;
             height: 85%;
         }
     }

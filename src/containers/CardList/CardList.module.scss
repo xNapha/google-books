@@ -1,7 +1,8 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Card_List {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include mixins.displayFlex(row, center, center);
     flex-wrap: wrap;
     margin-bottom: 30px;
+    background-color: variables.$primary-background-color;
 }

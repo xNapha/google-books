@@ -1,32 +1,30 @@
+@use "../../variables.module";
+@use "../../mixins..module";
 .Search_Bar {
-    border: 1px solid white;
+    border: 1px solid variables.$primary-border-color;
     width: 600px;
     height: 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include mixins.displayFlex(row, space-between, center);
     padding: 10px;
     border-radius: 25px;
-    background-color: #454545;
+    background-color: variables.$secondary-background-color;
 
     img {
         width: 20px;
-        filter: invert(100%) sepia(6%) saturate(27%) hue-rotate(289deg)
-            brightness(108%) contrast(100%);
+        filter: variables.$primary-svg-color;
     }
     input {
         background-color: rgba(0, 0, 0, 0);
         width: 94%;
         height: 2rem;
-        border-radius: 30px;
         border: 0px;
-        font-size: 20px;
-        color: white;
+        font-size: variables.$normal-font-size;
+        color: variables.$primary-border-color;
     }
     input:focus {
         outline: none;
     }
 }
 .Search_Bar:hover {
-    background-color: #454545;
+    background-color: variables.$secondary-background-color;
 }
