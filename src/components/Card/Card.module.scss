@@ -1,48 +1,57 @@
 .Card {
-    border: 1px solid black;
-    width: 25vw;
-    max-width: 400px;
-    height: 450px;
+    width: 200px;
+    height: 300px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: end;
+    margin: 10px;
+    box-shadow: 5px 5px 5px black;
     > * {
         color: black;
     }
-
     &-image {
-        position: relative;
-        z-index: -1;
-        height: 350px;
-        width: 25vw;
-        border-radius: 20px 20px 0px 0px;
-        max-width: 400px;
+        position: absolute;
+        z-index: 0;
+        height: 300px;
+        width: 200px;
+        border-radius: 20px;
     }
-    &-description {
+    &-information {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         flex-direction: column;
-        background-color: white;
-        border-radius: 0px 0px 20px 20px;
-        height: 100px;
-        // &-title {
-        //     &-longer {
-        //         font-size: 0.6rem;
-        //     }
-        //     &-long {
-        //         font-size: 0.8rem;
-        //     }
-        // }
-        &-list {
-            overflow: auto;
-            height: 60px;
+        gap: 7px;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        height: 300px;
+        border-radius: 20px;
+        > * {
+            color: white;
+            margin-left: 10px;
+        }
+        &-title {
+            margin-top: 10px;
+            font-size: 20px;
+            height: 30px;
+            width: 180px;
+        }
+        &-author {
             width: 100%;
-            text-align: left;
-            list-style: disc;
-            padding-left: 20px;
+            margin-left: 25px;
+        }
+        &-description {
+            overflow: auto;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding-bottom: 10px;
+            width: 180px;
+            height: 85%;
         }
     }
+}
+.Card:hover {
+    cursor: pointer;
+}
+.Hidden {
+    visibility: hidden;
 }

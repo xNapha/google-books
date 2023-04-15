@@ -7,7 +7,6 @@ const fetchBook = async (searchTerm, startIndex = "0") => {
         )}&maxResults=${maxResults}&startIndex=${startIndex}`
     );
     const data = await response.json();
-    console.log(data);
     return data;
 };
 
@@ -19,11 +18,17 @@ export const initialSearch = async (
     search,
     bookSearch,
     setBookSearch,
-    setLoading
+    setLoading,
+    setNoBooks
 ) => {
     const data = await fetchBook(search);
-    setBookSearch([...bookSearch, ...data.items]);
     setLoading(false);
+    console.log(data.items);
+    if (!data.items) {
+        setNoBooks(true);
+    } else {
+        setBookSearch([...bookSearch, ...data.items]);
+    }
 };
 
 export default fetchBook;

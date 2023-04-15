@@ -15,16 +15,16 @@ const CardList = () => {
                 key={book.id}
                 title={book.volumeInfo?.title ?? ""}
                 authors={book.volumeInfo?.authors ?? []}
-                image={book.volumeInfo.imageLinks?.thumbnail ?? ""}
+                image={book.volumeInfo?.imageLinks?.thumbnail ?? ""}
+                description={book.volumeInfo?.description}
                 book={book}
             />
         );
     });
-
     return (
         <>
             <section className={styles.Card_List}>{createContent}</section>
-            {bookSearch > 0 ? "" : <LoadMore />}
+            {bookSearch.length > 600 ? "" : <LoadMore />}
         </>
     );
 };

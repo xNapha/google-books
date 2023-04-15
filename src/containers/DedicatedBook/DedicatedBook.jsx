@@ -3,22 +3,31 @@ import List from "../../components/List/List";
 import styles from "./DedicatedBook.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
 import { FavouritesContext } from "../../contexts/FavouritesProvider";
-import { useState } from "react";
-import {
-    addToFavourites,
-    checkFavourites,
-    deleteFromFavourites,
-} from "../../services/favourites";
+import { checkFavourites } from "../../services/favourites";
 
 const DedicatedBook = () => {
-    const { book, setBook } = useContext(BookContext);
+    const { book, setBook, bookSearch } = useContext(BookContext);
     const { favourites, setFavourites } = useContext(FavouritesContext);
     const { volumeInfo } = book;
-
-    const handleClick = (e) => {
-        e.preventDefault();
+    const handleClick = () => {
         checkFavourites(favourites, setFavourites, book);
+        // update books fetched from api to have favourites updated,
     };
+    const titleLength = volumeInfo?.title.length;
+
+    const applyStyle = (style) => {
+        return styles[`book-text${style}`];
+    };
+
+    const checkTitleLength =
+        titleLength > 30
+            ? `${styles["book-text_header-title-longest"]} ${styles["book-text_header-title"]}`
+            : titleLength > 20
+            ? `${styles["book-text_header-title-longer"]} ${styles["book-text_header-title"]}`
+            : titleLength > 14
+            ? `${styles["book-text_header-title-long"]} ${styles["book-text_header-title"]}`
+            : `${styles["book-text_header-title-normal"]} ${styles["book-text_header-title"]}`;
+
     return (
         <div className={styles.Dedicated_Book}>
             <div className={styles.Dedicated_Book_info}>
@@ -30,20 +39,33 @@ const DedicatedBook = () => {
                     alt={volumeInfo?.title ?? BOOKDEFAULTS.imageAlt}
                     className={styles["book-image"]}
                 />
-                <section className={styles["book-text"]}>
-                    <header className={styles["book-text_header"]}>
-                        <h1>{volumeInfo?.title ?? BOOKDEFAULTS.title}</h1>
-                        <button
+                <section className={applyStyle("")}>
+                    <header className={applyStyle("_header")}>
+                        <h1 className={checkTitleLength}>
+                            {volumeInfo?.title ?? BOOKDEFAULTS.title}
+                        </h1>
+                        <img
+                            src={
+                                !book.favourite
+                                    ? "../../src/assets/star-hollow.svg"
+                                    : "../../src/assets/star-filled.svg"
+                            }
+                            alt=""
+                            className={applyStyle("_header-favourite")}
+                            onClick={handleClick}
+                        />
+                        <img
+                            src="../../src/assets/x-mark.svg"
+                            alt="exit"
                             onClick={(e) => {
                                 e.preventDefault();
                                 setBook("");
                             }}
-                        >
-                            <img src="" alt="exit" />
-                        </button>
+                            className={applyStyle("_header-exit")}
+                        />
                     </header>
-                    <main className={styles["book-text_main"]}>
-                        <div className={styles["book-text_main-author"]}>
+                    <main className={applyStyle("_main")}>
+                        <div className={applyStyle("_main-author")}>
                             <h3>Authors:</h3>
                             <ul>
                                 {volumeInfo?.authors?.map((author, index) => (
@@ -51,40 +73,44 @@ const DedicatedBook = () => {
                                 )) ?? BOOKDEFAULTS.authors}
                             </ul>
                         </div>
-                        <div className={styles["book-text_main-category"]}>
+                        <div className={applyStyle("_main_author-category")}>
                             <h3>Category:</h3>
                             <ul>
-                                {<List>{volumeInfo?.categories}</List> ??
+                                {<p>{volumeInfo?.categories}</p> ??
                                     BOOKDEFAULTS.categories}
                             </ul>
                         </div>
-                        <div className={styles["book-text_main-description"]}>
+                        <div className={applyStyle("_main_author-description")}>
                             <h4>Description:</h4>
                             <p>
                                 {volumeInfo?.description ??
                                     BOOKDEFAULTS.description}
                             </p>
                         </div>
-                        <div className={styles["book-text_main-publishedDate"]}>
+                        <div
+                            className={applyStyle("_main_author-publishedDate")}
+                        >
                             <h5>Published Date:</h5>
                             <p>
                                 {volumeInfo?.publishedDate ??
                                     BOOKDEFAULTS.publishedDate}
                             </p>
                         </div>
-                        <div className={styles["book-text_main-publisher"]}>
+                        <div className={applyStyle("_main_author-publisher")}>
                             <h5>Publisher:</h5>
                             <p>
                                 {volumeInfo?.publisher ??
                                     BOOKDEFAULTS.publisher}
                             </p>
                         </div>
+                        <div>
+                            <h5>Langauge:</h5>
+                            <p>
+                                {volumeInfo?.language.toUpperCase() ??
+                                    BOOKDEFAULTS.maturityRating}
+                            </p>
+                        </div>
                     </main>
-                    <footer className={styles["book-text_footer"]}>
-                        <button onClick={handleClick}>
-                            {book.favourite ? "Unfavourite" : "Favourite"}
-                        </button>
-                    </footer>
                 </section>
             </div>
         </div>
@@ -99,7 +125,8 @@ const BOOKDEFAULTS = {
     categories: "No categories could be found for this book",
     imageAlt: "No image description could be found for this book",
     imagePath: "../src/assets/default_book.jpg",
-    description: "No descript could be found for this book",
+    description: "No description could be found for this book",
     publishedDate: "No published date could be found for this book",
     publisher: "No publisher could be found for this book",
+    maturityRating: "No maturity rating could be found for this book",
 };

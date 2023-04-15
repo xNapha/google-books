@@ -1,36 +1,60 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import List from "../List/List";
 import styles from "./Card.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
 
-const Card = ({ title, authors, image, book }) => {
+const Card = ({ title, authors, image, book, description }) => {
     const { setBook } = useContext(BookContext);
-    const listAuthors = authors.map((author, index) => (
-        <List key={index}>{author}</List>
-    ));
+    const [cardVisibility, setCardVisibility] = useState(false);
+    const [showInfo, setShowInfo] = useState(styles["Card-information"]);
 
-    const longTitle =
-        title.length > 35 ? `${title.substring(0, 35)}...` : title;
+    const shortenTitle =
+        title.length > 10 ? `${title.substring(0, 10)}...` : title;
+
+    const authorString = authors.join(", ");
+    const shortenAuthors =
+        authorString.length > 20
+            ? `${authorString.substring(0, 20)}...`
+            : authorString;
+
+    const handleClick = () => {
+        setBook(book);
+    };
+    const handleMouseEnter = () => {
+        setCardVisibility(true);
+    };
+    const handleMouseLeave = () => {
+        setCardVisibility(false);
+    };
+
+    useEffect(() => {
+        cardVisibility
+            ? setShowInfo(styles["Card-information"])
+            : setShowInfo(styles.Hidden);
+    }, [cardVisibility]);
+
     return (
         <div
             className={styles.Card}
-            onClick={() => {
-                setBook(book);
-            }}
+            onClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             <img
                 src={image || DEFAULTS.image}
                 alt={title}
                 className={styles["Card-image"]}
             />
-            <div className={styles["Card-description"]}>
-                <h3 className={styles["Card-description-title"]}>
-                    {longTitle}
-                </h3>
-                <h4 className={styles["Card-description-authors"]}>Authors:</h4>
-                <ul className={styles["Card-description-list"]}>
-                    {listAuthors}
-                </ul>
+            <div className={showInfo}>
+                <h1 className={styles["Card-information-title"]}>
+                    {shortenTitle}
+                </h1>
+                <p className={styles["Card-information-author"]}>
+                    {shortenAuthors}
+                </p>
+                <p className={styles["Card-information-description"]}>
+                    {description}
+                </p>
             </div>
         </div>
     );

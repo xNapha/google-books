@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
 import { initialSearch } from "../../services/fetchBook";
 import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import CardList from "../CardList/CardList";
 import DedicatedBook from "../DedicatedBook/DedicatedBook";
 import { BookContext } from "../../contexts/BookProvider";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
+import styles from "./SearchPage.module.scss";
 
 const SearchPage = () => {
     const { book } = useContext(BookContext);
@@ -19,26 +20,55 @@ const SearchPage = () => {
     } = useContext(SearchQueryContext);
     const { search } = useParams();
     const navigate = useNavigate();
+    const [noBooks, setNoBooks] = useState(true);
 
     useEffect(() => {
         setSearchTerm(search);
         navigate(`/${search.replace(/\s/g, "+")}`);
+        setNoBooks(false);
         setLoading(true);
-        initialSearch(search, bookSearch, setBookSearch, setLoading);
-    }, [searchTerm, search]);
+        initialSearch(
+            search,
+            bookSearch,
+            setBookSearch,
+            setLoading,
+            setNoBooks
+        );
+    }, [searchTerm]);
 
-    const mainContent = (
-        <main>
+    const bookContent = (
+        <>
             <CardList />
-            {book && <DedicatedBook book={book} />}
-        </main>
+            {book && <DedicatedBook favouritesPage={false} />}
+        </>
     );
+
+    const checkForValidBooks = () => {
+        let content = bookContent;
+        if (loading && !noBooks) {
+            content = (
+                <div>
+                    <img
+                        src="../../src/assets/spinner-solid.svg"
+                        alt="Loading..."
+                        className={styles["Search_Page-loading"]}
+                    />
+                </div>
+            );
+        } else if (!loading && noBooks) {
+            content = <p>No books containing {searchTerm} were found</p>;
+        }
+        return content;
+    };
+
     return (
         <>
             <header>
-                <NavigationBar />
+                <NavigationBar favouritesPageButton={true} />
             </header>
-            {loading ? <p>Loading...</p> : mainContent}
+            <main className={styles["Search_Page"]}>
+                {checkForValidBooks()}
+            </main>
         </>
     );
 };

@@ -6,9 +6,17 @@
         transform: rotate(359deg);
     }
 }
-.Load_More {
-    height: 100px;
-    img {
+
+.Search_Page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    z-index: -1;
+    background-color: #363636;
+    &-loading {
+        height: 100%;
         width: 50px;
         animation: rotation 2s infinite linear;
         filter: invert(100%) sepia(6%) saturate(27%) hue-rotate(289deg)
