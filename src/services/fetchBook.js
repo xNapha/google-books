@@ -16,18 +16,16 @@ export const loadMoreBooks = async (searchTerm, bookSearch, setBookSearch) => {
 };
 export const initialSearch = async (
     search,
-    bookSearch,
     setBookSearch,
     setLoading,
     setNoBooks
 ) => {
     const data = await fetchBook(search);
     setLoading(false);
-    console.log(data.items);
     if (!data.items) {
         setNoBooks(true);
     } else {
-        setBookSearch([...bookSearch, ...data.items]);
+        setBookSearch([...data.items]);
     }
 };
 

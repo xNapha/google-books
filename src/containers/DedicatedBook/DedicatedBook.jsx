@@ -1,32 +1,55 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import List from "../../components/List/List";
 import styles from "./DedicatedBook.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
 import { FavouritesContext } from "../../contexts/FavouritesProvider";
 import { checkFavourites } from "../../services/favourites";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
 
 const DedicatedBook = () => {
-    const { book, setBook, bookSearch } = useContext(BookContext);
+    const { book, setBook } = useContext(BookContext);
+    const { bookSearch, setBookSearch } = useContext(SearchQueryContext);
     const { favourites, setFavourites } = useContext(FavouritesContext);
     const { volumeInfo } = book;
     const handleClick = () => {
         checkFavourites(favourites, setFavourites, book);
-        // update books fetched from api to have favourites updated,
+        setBookSearch([...bookSearch]);
     };
-    const titleLength = volumeInfo?.title.length;
 
     const applyStyle = (style) => {
         return styles[`book-text${style}`];
     };
 
-    const checkTitleLength =
-        titleLength > 30
-            ? `${styles["book-text_header-title-longest"]} ${styles["book-text_header-title"]}`
-            : titleLength > 20
-            ? `${styles["book-text_header-title-longer"]} ${styles["book-text_header-title"]}`
-            : titleLength > 14
-            ? `${styles["book-text_header-title-long"]} ${styles["book-text_header-title"]}`
-            : `${styles["book-text_header-title-normal"]} ${styles["book-text_header-title"]}`;
+    const checkIfInFavouritesAlready = favourites.map((curr) => {
+        if (curr.id == book.id) {
+            book.favourite = curr.favourite;
+        }
+        setBook(book);
+    });
+
+    const checkTitleLength = () => {
+        const titleLength = volumeInfo?.title.length;
+        let appliedStyle = `${styles["book-text_header-title"]} `;
+        switch (titleLength) {
+            case titleLength > 30:
+                appliedStyle += `${styles["book-text_header-title-longest"]}`;
+                break;
+            case titleLength > 20:
+                appliedStyle += `${styles["book-text_header-title-longer"]}`;
+                break;
+            case titleLength > 14:
+                appliedStyle += `${styles["book-text_header-title-long"]}`;
+                break;
+            default:
+                appliedStyle += `${styles["book-text_header-title-normal"]}`;
+                break;
+        }
+        return appliedStyle;
+    };
+
+    useEffect(() => {
+        checkIfInFavouritesAlready;
+    }, []);
 
     return (
         <div className={styles.Dedicated_Book}>
@@ -41,7 +64,7 @@ const DedicatedBook = () => {
                 />
                 <section className={applyStyle("")}>
                     <header className={applyStyle("_header")}>
-                        <h1 className={checkTitleLength}>
+                        <h1 className={checkTitleLength()}>
                             {volumeInfo?.title ?? BOOKDEFAULTS.title}
                         </h1>
                         <img

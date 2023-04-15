@@ -7,17 +7,13 @@ import DedicatedBook from "../DedicatedBook/DedicatedBook";
 import { BookContext } from "../../contexts/BookProvider";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import styles from "./SearchPage.module.scss";
+import { FavouritesContext } from "../../contexts/FavouritesProvider";
 
 const SearchPage = () => {
     const { book } = useContext(BookContext);
-    const {
-        searchTerm,
-        bookSearch,
-        setBookSearch,
-        loading,
-        setLoading,
-        setSearchTerm,
-    } = useContext(SearchQueryContext);
+    const { searchTerm, setBookSearch, loading, setLoading, setSearchTerm } =
+        useContext(SearchQueryContext);
+    const { favourites } = useContext(FavouritesContext);
     const { search } = useParams();
     const navigate = useNavigate();
     const [noBooks, setNoBooks] = useState(true);
@@ -25,15 +21,10 @@ const SearchPage = () => {
     useEffect(() => {
         setSearchTerm(search);
         navigate(`/${search.replace(/\s/g, "+")}`);
+
         setNoBooks(false);
         setLoading(true);
-        initialSearch(
-            search,
-            bookSearch,
-            setBookSearch,
-            setLoading,
-            setNoBooks
-        );
+        initialSearch(search, setBookSearch, setLoading, setNoBooks);
     }, [searchTerm]);
 
     const bookContent = (

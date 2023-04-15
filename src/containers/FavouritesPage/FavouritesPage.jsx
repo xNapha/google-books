@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import { FavouritesContext } from "../../contexts/FavouritesProvider";
 import Card from "../../components/Card/Card";
 import styles from "./Favourites.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
 import DedicatedBook from "../DedicatedBook/DedicatedBook";
+import removeDuplicateBooks from "../../services/removeDuplicateBooks";
 
 const Favourites = () => {
     const {
@@ -15,20 +16,22 @@ const Favourites = () => {
     } = useContext(FavouritesContext);
     const { book } = useContext(BookContext);
 
-    const createContent = filteredFavourites?.map((filteredBook) => {
-        return (
-            <Card
-                key={filteredBook.id}
-                title={filteredBook.volumeInfo?.title ?? ""}
-                authors={filteredBook.volumeInfo?.authors ?? []}
-                image={filteredBook.volumeInfo.imageLinks?.thumbnail ?? ""}
-                book={filteredBook}
-            />
-        );
-    });
+    const createContent = removeDuplicateBooks(filteredFavourites)?.map(
+        (filteredBook) => {
+            return (
+                <Card
+                    key={filteredBook.id}
+                    title={filteredBook.volumeInfo?.title ?? ""}
+                    authors={filteredBook.volumeInfo?.authors ?? []}
+                    image={filteredBook.volumeInfo.imageLinks?.thumbnail ?? ""}
+                    book={filteredBook}
+                />
+            );
+        }
+    );
     useEffect(() => {
         setFilteredFavourites([...favourites]);
-    }, []);
+    }, [favourites]);
 
     const checkForFavouriteBooks = () => {
         let content = createContent;

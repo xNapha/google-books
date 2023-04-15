@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
 import Card from "../../components/Card/Card";
 import styles from "./CardList.module.scss";
@@ -9,7 +9,9 @@ const CardList = () => {
     const { bookSearch } = useContext(SearchQueryContext);
 
     const createContent = removeDuplicateBooks(bookSearch)?.map((book) => {
-        book.favourite = false;
+        if (!book.favourite) {
+            book.favourite = false;
+        }
         return (
             <Card
                 key={book.id}
@@ -21,6 +23,8 @@ const CardList = () => {
             />
         );
     });
+    useEffect(() => {}, [bookSearch]);
+
     return (
         <>
             <section className={styles.Card_List}>{createContent}</section>
