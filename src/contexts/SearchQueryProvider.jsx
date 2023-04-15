@@ -3,13 +3,13 @@ import React, { createContext, useState } from "react";
 export const SearchQueryContext = createContext();
 const SearchQueryProvider = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState("");
-    const [bookSearch, setBookSearch] = useState([]);
+    const [searchedBooks, setSearchedBooks] = useState([]);
     const [loading, setLoading] = useState(false);
     const value = {
         searchTerm,
         setSearchTerm,
-        bookSearch,
-        setBookSearch,
+        searchedBooks,
+        setSearchedBooks,
         loading,
         setLoading,
     };

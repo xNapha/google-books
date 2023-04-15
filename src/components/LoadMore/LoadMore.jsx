@@ -6,11 +6,11 @@ import styles from "./LoadMore.module.scss";
 
 const LoadMore = () => {
     const { ref, inView } = useInView();
-    const { searchTerm, bookSearch, setBookSearch } =
+    const { searchTerm, setSearchedBooks, searchedBooks } =
         useContext(SearchQueryContext);
 
     useEffect(() => {
-        loadMoreBooks(searchTerm, bookSearch, setBookSearch);
+        loadMoreBooks(searchTerm, searchedBooks, setSearchedBooks);
     }, [inView]);
 
     return (

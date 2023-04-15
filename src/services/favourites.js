@@ -7,7 +7,6 @@ export const addToFavourites = (favourites, setFavourites, book) => {
 
 export const deleteFromFavourites = (favourites, setFavourites, book) => {
     const filteredFavourites = favourites.filter((curr) => curr.id !== book.id);
-    console.log(filteredFavourites);
     return setFavourites(filteredFavourites);
 };
 

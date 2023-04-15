@@ -6,9 +6,11 @@ import LoadMore from "../../components/LoadMore/LoadMore";
 import removeDuplicateBooks from "../../services/removeDuplicateBooks";
 
 const CardList = () => {
-    const { bookSearch } = useContext(SearchQueryContext);
+    const { searchedBooks } = useContext(SearchQueryContext);
 
-    const createContent = removeDuplicateBooks(bookSearch)?.map((book) => {
+    const maximumLimitofBooksToSearchFor = 600;
+
+    const createContent = removeDuplicateBooks(searchedBooks)?.map((book) => {
         if (!book.favourite) {
             book.favourite = false;
         }
@@ -23,12 +25,15 @@ const CardList = () => {
             />
         );
     });
-    useEffect(() => {}, [bookSearch]);
 
     return (
         <>
             <section className={styles.Card_List}>{createContent}</section>
-            {bookSearch.length > 600 ? "" : <LoadMore />}
+            {searchedBooks.length > maximumLimitofBooksToSearchFor ? (
+                ""
+            ) : (
+                <LoadMore />
+            )}
         </>
     );
 };

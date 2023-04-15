@@ -7,12 +7,12 @@ import { checkFavourites } from "../../services/favourites";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
 
 const DedicatedBook = () => {
-    const { book, setBook } = useContext(BookContext);
+    const { singleBook, setSingleBook } = useContext(BookContext);
     const { bookSearch, setBookSearch } = useContext(SearchQueryContext);
-    const { favourites, setFavourites } = useContext(FavouritesContext);
-    const { volumeInfo } = book;
+    const { favouriteBooks, setFavouriteBooks } = useContext(FavouritesContext);
+    const { volumeInfo } = singleBook;
     const handleClick = () => {
-        checkFavourites(favourites, setFavourites, book);
+        checkFavourites(favouriteBooks, setFavouriteBooks, singleBook);
         setBookSearch([...bookSearch]);
     };
 
@@ -20,35 +20,29 @@ const DedicatedBook = () => {
         return styles[`book-text${style}`];
     };
 
-    const checkIfInFavouritesAlready = favourites.map((curr) => {
-        if (curr.id == book.id) {
-            book.favourite = curr.favourite;
+    const checkIfInFavouriteBooksAlready = favouriteBooks.map((curr) => {
+        if (curr.id == singleBook.id) {
+            singleBook.favourite = curr.favourite;
         }
-        setBook(book);
     });
 
     const checkTitleLength = () => {
         const titleLength = volumeInfo?.title.length;
         let appliedStyle = `${styles["book-text_header-title"]} `;
-        switch (titleLength) {
-            case titleLength > 30:
-                appliedStyle += `${styles["book-text_header-title-longest"]}`;
-                break;
-            case titleLength > 20:
-                appliedStyle += `${styles["book-text_header-title-longer"]}`;
-                break;
-            case titleLength > 14:
-                appliedStyle += `${styles["book-text_header-title-long"]}`;
-                break;
-            default:
-                appliedStyle += `${styles["book-text_header-title-normal"]}`;
-                break;
+        if (titleLength > 30) {
+            appliedStyle += `${styles["book-text_header-title-longest"]}`;
+        } else if (titleLength > 20) {
+            appliedStyle += `${styles["book-text_header-title-longer"]}`;
+        } else if (titleLength > 14) {
+            appliedStyle += `${styles["book-text_header-title-long"]}`;
+        } else {
+            appliedStyle += `${styles["book-text_header-title-normal"]}`;
         }
         return appliedStyle;
     };
 
     useEffect(() => {
-        checkIfInFavouritesAlready;
+        checkIfInFavouriteBooksAlready;
     }, []);
 
     return (
@@ -69,7 +63,7 @@ const DedicatedBook = () => {
                         </h1>
                         <img
                             src={
-                                !book.favourite
+                                !singleBook.favourite
                                     ? "../../src/assets/star-hollow.svg"
                                     : "../../src/assets/star-filled.svg"
                             }
@@ -82,7 +76,7 @@ const DedicatedBook = () => {
                             alt="exit"
                             onClick={(e) => {
                                 e.preventDefault();
-                                setBook("");
+                                setSingleBook("");
                             }}
                             className={applyStyle("_header-exit")}
                         />

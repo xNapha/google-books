@@ -1,7 +1,6 @@
 import SearchBar from "../../components/SearchBar/SearchBar";
 import styles from "./HomePage.module.scss";
 import Footer from "../../components/Footer/Footer";
-import { NavLink } from "react-router-dom";
 import {
     navigateToFavourites,
     submitSearch,

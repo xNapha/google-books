@@ -5,15 +5,13 @@ import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import CardList from "../CardList/CardList";
 import DedicatedBook from "../DedicatedBook/DedicatedBook";
 import { BookContext } from "../../contexts/BookProvider";
-import { useParams, useNavigate, NavLink } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styles from "./SearchPage.module.scss";
-import { FavouritesContext } from "../../contexts/FavouritesProvider";
 
 const SearchPage = () => {
-    const { book } = useContext(BookContext);
-    const { searchTerm, setBookSearch, loading, setLoading, setSearchTerm } =
+    const { singleBook } = useContext(BookContext);
+    const { searchTerm, setSearchedBooks, loading, setLoading, setSearchTerm } =
         useContext(SearchQueryContext);
-    const { favourites } = useContext(FavouritesContext);
     const { search } = useParams();
     const navigate = useNavigate();
     const [noBooks, setNoBooks] = useState(true);
@@ -21,16 +19,15 @@ const SearchPage = () => {
     useEffect(() => {
         setSearchTerm(search);
         navigate(`/${search.replace(/\s/g, "+")}`);
-
         setNoBooks(false);
         setLoading(true);
-        initialSearch(search, setBookSearch, setLoading, setNoBooks);
+        initialSearch(search, setSearchedBooks, setLoading, setNoBooks);
     }, [searchTerm]);
 
     const bookContent = (
         <>
             <CardList />
-            {book && <DedicatedBook favouritesPage={false} />}
+            {singleBook && <DedicatedBook favouritesPage={false} />}
         </>
     );
 

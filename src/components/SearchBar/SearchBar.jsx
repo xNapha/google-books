@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
 import { useNavigate } from "react-router-dom";
 import styles from "./SearchBar.module.scss";
@@ -10,8 +10,8 @@ const SearchBar = ({
     stylesButtons,
     favouritesPage,
 }) => {
-    const { setSearchTerm, setBookSearch } = useContext(SearchQueryContext);
-    const { favourites, setFilteredFavourites, setFilteredSearchTerm } =
+    const { setSearchTerm, setSearchedBooks } = useContext(SearchQueryContext);
+    const { favouriteBooks, setFilteredFavouriteBooks, setFilteredSearchTerm } =
         useContext(FavouritesContext);
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ const SearchBar = ({
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!favouritesPage) {
-            setBookSearch([]);
+            setSearchedBooks([]);
             setSearchTerm(search);
             navigate(`/${search.replace(/[\s]/g, "+")}`);
         }
@@ -29,10 +29,10 @@ const SearchBar = ({
             setSearch(e.target.value);
         } else {
             setFilteredSearchTerm(e.target.value);
-            const filtered = favourites.filter((book) =>
+            const filtered = favouriteBooks.filter((book) =>
                 book.volumeInfo.title.toLowerCase().includes(e.target.value)
             );
-            setFilteredFavourites(filtered);
+            setFilteredFavouriteBooks(filtered);
         }
     };
 

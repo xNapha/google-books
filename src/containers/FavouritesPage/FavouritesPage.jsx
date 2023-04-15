@@ -9,14 +9,14 @@ import removeDuplicateBooks from "../../services/removeDuplicateBooks";
 
 const Favourites = () => {
     const {
-        favourites,
-        filteredFavourites,
-        setFilteredFavourites,
+        favouriteBooks,
+        filteredFavouriteBooks,
+        setFilteredFavouriteBooks,
         filteredSearchTerm,
     } = useContext(FavouritesContext);
-    const { book } = useContext(BookContext);
+    const { singleBook } = useContext(BookContext);
 
-    const createContent = removeDuplicateBooks(filteredFavourites)?.map(
+    const createContent = removeDuplicateBooks(filteredFavouriteBooks)?.map(
         (filteredBook) => {
             return (
                 <Card
@@ -30,19 +30,19 @@ const Favourites = () => {
         }
     );
     useEffect(() => {
-        setFilteredFavourites([...favourites]);
-    }, [favourites]);
+        setFilteredFavouriteBooks([...favouriteBooks]);
+    }, [favouriteBooks]);
 
     const checkForFavouriteBooks = () => {
         let content = createContent;
-        if (favourites.length > 0 && filteredFavourites.length === 0) {
+        if (favouriteBooks.length > 0 && filteredFavouriteBooks.length === 0) {
             content = (
                 <p>
                     No books that include {filteredSearchTerm}, were found in
                     your favourites
                 </p>
             );
-        } else if (favourites.length === 0) {
+        } else if (favouriteBooks.length === 0) {
             content = <p>No favourite books assigned</p>;
         }
         return content;
@@ -52,7 +52,7 @@ const Favourites = () => {
         <div>
             <NavigationBar favouritesPage={true} />
             <div className={styles.Favourites}>{checkForFavouriteBooks()}</div>
-            {book && <DedicatedBook favouritesPage={true} />}
+            {singleBook && <DedicatedBook favouritesPage={true} />}
         </div>
     );
 };

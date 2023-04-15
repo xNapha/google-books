@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import List from "../List/List";
 import styles from "./Card.module.scss";
 import { BookContext } from "../../contexts/BookProvider";
 
 const Card = ({ title, authors, image, book, description }) => {
-    const { setBook } = useContext(BookContext);
+    const { setSingleBook } = useContext(BookContext);
     const [cardVisibility, setCardVisibility] = useState(false);
     const [showInfo, setShowInfo] = useState(styles["Card-information"]);
 
@@ -12,13 +11,14 @@ const Card = ({ title, authors, image, book, description }) => {
         title.length > 10 ? `${title.substring(0, 10)}...` : title;
 
     const authorString = authors.join(", ");
+
     const shortenAuthors =
         authorString.length > 20
             ? `${authorString.substring(0, 20)}...`
             : authorString;
 
     const handleClick = () => {
-        setBook(book);
+        setSingleBook(book);
     };
     const handleMouseEnter = () => {
         setCardVisibility(true);
