@@ -2,7 +2,9 @@
 @use "../../mixins..module";
 .Search_Bar {
     border: 1px solid variables.$primary-border-color;
-    width: 600px;
+    min-width: 350px;
+    width: 80vw;
+    max-width: 600px;
     height: 3rem;
     @include mixins.displayFlex(row, space-between, center);
     padding: 10px;
@@ -18,13 +20,26 @@
         width: 94%;
         height: 2rem;
         border: 0px;
+        padding-left: 10px;
         font-size: variables.$normal-font-size;
         color: variables.$primary-border-color;
     }
     input:focus {
         outline: none;
     }
+    button {
+        background-color: variables.$secondary-background-color;
+        border: 0px;
+    }
+    button:hover {
+        cursor: pointer;
+    }
 }
 .Search_Bar:hover {
     background-color: variables.$secondary-background-color;
+}
+@include mixins.mediaQueries {
+    .Search_Bar {
+        height: 2rem;
+    }
 }

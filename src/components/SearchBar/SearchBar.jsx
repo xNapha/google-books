@@ -39,8 +39,14 @@ const SearchBar = ({
     return (
         <form onSubmit={handleSubmit} onChange={handleChange}>
             <div className={styles.Search_Bar}>
-                <img src="../../src/assets/magnifying-glass.svg" alt="" />
+                <img
+                    src="../../src/assets/magnifying-glass.svg"
+                    alt="search bar"
+                />
                 <input type="text" />
+                <button>
+                    <img src="../../src/assets/send-solid.svg" alt="send" />
+                </button>
             </div>
             <div className={applyStyles(stylesButtons)}>
                 {submitSearch}

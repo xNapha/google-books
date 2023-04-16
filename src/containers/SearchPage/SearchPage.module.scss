@@ -11,3 +11,9 @@
         @include mixins.loadingImage();
     }
 }
+
+@include mixins.mediaQueries {
+    .Search_Page {
+        margin-top: 165px;
+    }
+}

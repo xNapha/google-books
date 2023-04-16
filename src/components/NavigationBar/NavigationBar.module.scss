@@ -15,6 +15,7 @@
     &-logo {
         width: 200px;
         margin-right: 30px;
+        grid-area: logo;
     }
     &-favourites {
         @include mixins.displayFlex(row, center, center);
@@ -23,9 +24,26 @@
         border: 1px solid variables.$primary-border-color;
         background-color: variables.$primary-background-color;
         border-radius: 10px;
+        grid-area: button;
+        font-weight: bolder;
     }
     &-favourites:hover {
         cursor: pointer;
         background-color: variables.$secondary-background-color;
+    }
+}
+.hidden {
+    margin-top: -180px;
+    transition: 1s;
+}
+@include mixins.mediaQueries {
+    .Navigation_Bar {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding-top: 10px;
+        justify-items: center;
+        align-items: center;
+        height: 160px;
+        gap: 5px;
     }
 }

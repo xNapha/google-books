@@ -1,11 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./NavigationBar.module.scss";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
+import {
+    toggleNavBar,
+    toggleButton,
+} from "../../services/variables/NavigationBar";
 
 const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
     const { searchTerm } = useContext(SearchQueryContext);
+    const [prevScrollLocation, setPrevScrollLocation] = useState(
+        window.pageYOffset
+    );
+    const [style, setStyle] = useState(`${styles.Navigation_Bar}`);
     const toFavourites = (
         <NavLink to="/favourites/">
             <button className={styles["Navigation_Bar-favourites"]}>
@@ -22,16 +30,18 @@ const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
         </NavLink>
     );
 
-    const toggleButton = () => {
-        if (favouritesPageButton) {
-            return toFavourites;
-        } else {
-            return toSearchPage;
-        }
-    };
+    window.addEventListener("scroll", () => {
+        toggleNavBar(
+            prevScrollLocation,
+            setPrevScrollLocation,
+            style,
+            styles,
+            setStyle
+        );
+    });
 
     return (
-        <div className={styles.Navigation_Bar}>
+        <div className={style}>
             <NavLink to="/">
                 <img
                     src="../../src/assets/google-books.svg"
@@ -40,7 +50,7 @@ const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
                 />
             </NavLink>
             <SearchBar favouritesPage={favouritesPage} />
-            {toggleButton()}
+            {toggleButton(favouritesPageButton, toFavourites, toSearchPage)}
         </div>
     );
 };

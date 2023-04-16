@@ -5,3 +5,8 @@
     flex-wrap: wrap;
     margin-top: variables.$header-height;
 }
+@include mixins.mediaQueries {
+    .Favourites {
+        margin-top: 165px;
+    }
+}
