@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
-import { FavouritesContext } from "../../contexts/FavouritesProvider";
-import Card from "../../components/Card/Card";
+import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
+import { FavouritesContext } from "../../contexts/FavouritesProvider.jsx";
+import Card from "../../components/Card/Card.jsx";
 import styles from "./Favourites.module.scss";
-import { BookContext } from "../../contexts/BookProvider";
-import DedicatedBook from "../DedicatedBook/DedicatedBook";
-import removeDuplicateBooks from "../../services/removeDuplicateBooks";
+import { BookContext } from "../../contexts/BookProvider.jsx";
+import DedicatedBook from "../DedicatedBook/DedicatedBook.jsx";
+import removeDuplicateBooks from "../../services/removeDuplicateBooks.js";
 
 const Favourites = () => {
     const {

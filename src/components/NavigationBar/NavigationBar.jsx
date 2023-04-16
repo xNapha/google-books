@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar.jsx";
 import styles from "./NavigationBar.module.scss";
-import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
-import {
-    toggleNavBar,
-    toggleButton,
-} from "../../services/variables/NavigationBar";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
+import { toggleNavBar, toggleButton } from "../../services/NavigationBar.js";
 
 const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
     const { searchTerm } = useContext(SearchQueryContext);

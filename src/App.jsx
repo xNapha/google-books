@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./containers/HomePage/HomePage";
-import SearchPage from "./containers/SearchPage/SearchPage";
-import NotFound from "./containers/NotFound/NotFound";
-import FavouritesPage from "./containers/FavouritesPage/FavouritesPage";
+import HomePage from "./containers/HomePage/HomePage.jsx";
+import SearchPage from "./containers/SearchPage/SearchPage.jsx";
+import NotFound from "./containers/NotFound/NotFound.jsx";
+import FavouritesPage from "./containers/FavouritesPage/FavouritesPage.jsx";
 const App = () => {
     return (
         <Routes>

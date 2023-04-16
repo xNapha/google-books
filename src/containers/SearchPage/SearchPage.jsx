@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
-import { initialSearch } from "../../services/fetchBook";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
-import CardList from "../CardList/CardList";
-import DedicatedBook from "../DedicatedBook/DedicatedBook";
-import { BookContext } from "../../contexts/BookProvider";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
+import { initialSearch } from "../../services/fetchBook.js";
+import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
+import CardList from "../CardList/CardList.jsx";
+import DedicatedBook from "../DedicatedBook/DedicatedBook.jsx";
+import { BookContext } from "../../contexts/BookProvider.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./SearchPage.module.scss";
 

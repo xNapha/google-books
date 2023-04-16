@@ -1,10 +1,10 @@
-import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import styles from "./HomePage.module.scss";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footer/Footer.jsx";
 import {
     navigateToFavourites,
     submitSearch,
-} from "../../services/variables/HomePage";
+} from "../../services/HomePage.jsx";
 
 const HomePage = () => {
     const stylesForm = styles["Home_Page-search"];

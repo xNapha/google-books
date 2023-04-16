@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
-import Card from "../../components/Card/Card";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
+import Card from "../../components/Card/Card.jsx";
 import styles from "./CardList.module.scss";
-import LoadMore from "../../components/LoadMore/LoadMore";
-import removeDuplicateBooks from "../../services/removeDuplicateBooks";
+import LoadMore from "../../components/LoadMore/LoadMore.jsx";
+import removeDuplicateBooks from "../../services/removeDuplicateBooks.js";
 
 const CardList = () => {
     const { searchedBooks } = useContext(SearchQueryContext);

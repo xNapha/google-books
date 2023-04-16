@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
 import { useInView } from "react-intersection-observer";
-import { loadMoreBooks } from "../../services/fetchBook";
+import { loadMoreBooks } from "../../services/fetchBook.js";
 import styles from "./LoadMore.module.scss";
 
 const LoadMore = () => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import NavigationBar from "../../components/NavigationBar/NavigationBar";
+import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
 import { useNavigate } from "react-router-dom";
 import styles from "./NotFound.module.scss";
 

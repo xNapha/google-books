@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Card.module.scss";
-import { BookContext } from "../../contexts/BookProvider";
+import { BookContext } from "../../contexts/BookProvider.jsx";
 
 const Card = ({ title, authors, image, book, description }) => {
     const { setSingleBook } = useContext(BookContext);

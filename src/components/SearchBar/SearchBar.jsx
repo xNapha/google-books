@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
 import { useNavigate } from "react-router-dom";
 import styles from "./SearchBar.module.scss";
-import { applyStyles } from "../../services/applyStyles";
-import { FavouritesContext } from "../../contexts/FavouritesProvider";
+import { applyStyles } from "../../services/applyStyles.js";
+import { FavouritesContext } from "../../contexts/FavouritesProvider.jsx";
 const SearchBar = ({
     navigateToFavourites,
     submitSearch,

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import List from "../../components/List/List";
 import styles from "./DedicatedBook.module.scss";
-import { BookContext } from "../../contexts/BookProvider";
-import { FavouritesContext } from "../../contexts/FavouritesProvider";
-import { checkFavourites } from "../../services/favourites";
-import { SearchQueryContext } from "../../contexts/SearchQueryProvider";
+import { BookContext } from "../../contexts/BookProvider.jsx";
+import { FavouritesContext } from "../../contexts/FavouritesProvider.jsx";
+import { checkFavourites } from "../../services/favourites.js";
+import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
 
 const DedicatedBook = () => {
     const { singleBook, setSingleBook } = useContext(BookContext);
