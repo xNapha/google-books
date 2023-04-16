@@ -22,7 +22,7 @@ const SearchBar = ({
         if (!favouritesPage) {
             setSearchedBooks([]);
             setSearchTerm(search);
-            navigate(`/${search.replace(/[\s]/g, "+")}`);
+            navigate(`/google-books/${search.replace(/[\s]/g, "+")}`);
         }
     };
     const handleChange = (e) => {

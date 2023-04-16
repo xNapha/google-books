@@ -13,7 +13,7 @@ const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
     );
     const [style, setStyle] = useState(`${styles.Navigation_Bar}`);
     const toFavourites = (
-        <NavLink to="/favourites/">
+        <NavLink to="/google-books/favourites/">
             <button className={styles["Navigation_Bar-favourites"]}>
                 Favourites
             </button>
@@ -21,7 +21,7 @@ const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
     );
 
     const toSearchPage = (
-        <NavLink to={`/${searchTerm.replace(/\s/g, "+")}`}>
+        <NavLink to={`/google-books/${searchTerm.replace(/\s/g, "+")}`}>
             <button className={styles["Navigation_Bar-favourites"]}>
                 Leave
             </button>
