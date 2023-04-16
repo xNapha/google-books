@@ -19,7 +19,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         setSearchTerm(search);
-        navigate(`/${search.replace(/\s/g, "+")}`);
+        navigate(`/google-books/${search.replace(/\s/g, "+")}`);
         setNoBooks(false);
         setLoading(true);
         initialSearch(search, setSearchedBooks, setLoading, setNoBooks);

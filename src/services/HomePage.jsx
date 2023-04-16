@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 export const navigateToFavourites = (
-    <NavLink to="/favourites/">
+    <NavLink to="/google-books/favourites/">
         <button>Favourites</button>
     </NavLink>
 );

@@ -40,7 +40,7 @@ const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
 
     return (
         <div className={style}>
-            <NavLink to="/">
+            <NavLink to="/google-books/">
                 <img
                     src={IMAGES.googleBooks}
                     alt=""

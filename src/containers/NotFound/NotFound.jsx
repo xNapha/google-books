@@ -7,7 +7,7 @@ const NotFound = () => {
     const navigate = useNavigate();
     useEffect(() => {
         setTimeout(() => {
-            navigate("/");
+            navigate("/google-books/");
         }, 2000);
     }, []);
     return (
