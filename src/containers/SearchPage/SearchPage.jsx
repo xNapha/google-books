@@ -7,6 +7,7 @@ import DedicatedBook from "../DedicatedBook/DedicatedBook.jsx";
 import { BookContext } from "../../contexts/BookProvider.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./SearchPage.module.scss";
+import IMAGES from "../../Images/images.jsx";
 
 const SearchPage = () => {
     const { singleBook } = useContext(BookContext);
@@ -37,7 +38,7 @@ const SearchPage = () => {
             content = (
                 <div>
                     <img
-                        src="../../src/assets/spinner-solid.svg"
+                        src={IMAGES.spinner}
                         alt="Loading..."
                         className={styles["Search_Page-loading"]}
                     />

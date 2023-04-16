@@ -3,7 +3,7 @@ import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
 import { useInView } from "react-intersection-observer";
 import { loadMoreBooks } from "../../services/fetchBook.js";
 import styles from "./LoadMore.module.scss";
-
+import IMAGES from "../../Images/images.jsx";
 const LoadMore = () => {
     const { ref, inView } = useInView();
     const { searchTerm, setSearchedBooks, searchedBooks } =
@@ -15,7 +15,7 @@ const LoadMore = () => {
 
     return (
         <div className={styles.Load_More} ref={ref}>
-            <img src="../../src/assets/spinner-solid.svg" alt="Loading..." />
+            <img src={IMAGES.spinner} alt="Loading..." />
         </div>
     );
 };

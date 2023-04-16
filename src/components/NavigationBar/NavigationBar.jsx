@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar.jsx";
 import styles from "./NavigationBar.module.scss";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
 import { toggleNavBar, toggleButton } from "../../services/NavigationBar.js";
+import IMAGES from "../../Images/images.jsx";
 
 const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
     const { searchTerm } = useContext(SearchQueryContext);
@@ -41,7 +42,7 @@ const NavigationBar = ({ favouritesPageButton, favouritesPage }) => {
         <div className={style}>
             <NavLink to="/">
                 <img
-                    src="../../src/assets/google-books.svg"
+                    src={IMAGES.googleBooks}
                     alt=""
                     className={styles["Navigation_Bar-logo"]}
                 />

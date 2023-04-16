@@ -5,7 +5,7 @@ import { BookContext } from "../../contexts/BookProvider.jsx";
 import { FavouritesContext } from "../../contexts/FavouritesProvider.jsx";
 import { checkFavourites } from "../../services/favourites.js";
 import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
-
+import IMAGES from "../../Images/images";
 const DedicatedBook = () => {
     const { singleBook, setSingleBook } = useContext(BookContext);
     const { bookSearch, setBookSearch } = useContext(SearchQueryContext);
@@ -64,15 +64,15 @@ const DedicatedBook = () => {
                         <img
                             src={
                                 !singleBook.favourite
-                                    ? "../../src/assets/star-hollow.svg"
-                                    : "../../src/assets/star-filled.svg"
+                                    ? IMAGES.starHollow
+                                    : IMAGES.starFilled
                             }
                             alt=""
                             className={applyStyle("_header-favourite")}
                             onClick={handleClick}
                         />
                         <img
-                            src="../../src/assets/x-mark.svg"
+                            src={IMAGES.exit}
                             alt="exit"
                             onClick={(e) => {
                                 e.preventDefault();

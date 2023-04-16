@@ -8,8 +8,10 @@ export const toggleNavBar = (
     const currentPos = window.pageYOffset;
     if (window.innerWidth < 951 && prevScrollLocation > currentPos) {
         setStyle(`${styles.Navigation_Bar}`);
-    } else {
+    } else if (window.innerWidth < 951 && !prevScrollLocation > currentPos) {
         setStyle(`${style} ${styles.hidden}`);
+    } else {
+        setStyle(`${styles.Navigation_Bar}`);
     }
     setPrevScrollLocation(currentPos);
 };

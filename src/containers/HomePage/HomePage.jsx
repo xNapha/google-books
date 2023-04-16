@@ -5,6 +5,7 @@ import {
     navigateToFavourites,
     submitSearch,
 } from "../../services/HomePage.jsx";
+import IMAGES from "../../Images/images.jsx";
 
 const HomePage = () => {
     const stylesForm = styles["Home_Page-search"];
@@ -14,8 +15,8 @@ const HomePage = () => {
         <>
             <div className={styles.Home_Page}>
                 <img
-                    src="../../src/assets/google-books.svg"
-                    alt=""
+                    src={IMAGES.googleBooks}
+                    alt="google books"
                     className={styles["Home_Page-logo"]}
                 />
                 <SearchBar

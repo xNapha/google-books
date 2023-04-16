@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./SearchBar.module.scss";
 import { applyStyles } from "../../services/applyStyles.js";
 import { FavouritesContext } from "../../contexts/FavouritesProvider.jsx";
+import IMAGES from "../../Images/images.jsx";
 const SearchBar = ({
     navigateToFavourites,
     submitSearch,
@@ -39,13 +40,10 @@ const SearchBar = ({
     return (
         <form onSubmit={handleSubmit} onChange={handleChange}>
             <div className={styles.Search_Bar}>
-                <img
-                    src="../../src/assets/magnifying-glass.svg"
-                    alt="search bar"
-                />
+                <img src={IMAGES.magnifyingGlass} alt="magnifying glass" />
                 <input type="text" />
                 <button>
-                    <img src="../../src/assets/send-solid.svg" alt="send" />
+                    <img src={IMAGES.send} alt="send" />
                 </button>
             </div>
             <div className={applyStyles(stylesButtons)}>
