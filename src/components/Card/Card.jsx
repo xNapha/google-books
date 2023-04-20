@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Card.module.scss";
 import { BookContext } from "../../contexts/BookProvider.jsx";
-
+import IMAGES from "../../Images/images";
 const Card = ({ title, authors, image, book, description }) => {
     const { setSingleBook } = useContext(BookContext);
     const [cardVisibility, setCardVisibility] = useState(false);
@@ -41,7 +41,7 @@ const Card = ({ title, authors, image, book, description }) => {
             onMouseLeave={handleMouseLeave}
         >
             <img
-                src={image || DEFAULTS.image}
+                src={image || IMAGES.noCover}
                 alt={title}
                 className={styles["Card-image"]}
             />

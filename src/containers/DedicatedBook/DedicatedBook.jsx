@@ -49,10 +49,7 @@ const DedicatedBook = () => {
         <div className={styles.Dedicated_Book}>
             <div className={styles.Dedicated_Book_info}>
                 <img
-                    src={
-                        volumeInfo?.imageLinks?.thumbnail ??
-                        BOOKDEFAULTS.imagePath
-                    }
+                    src={volumeInfo?.imageLinks?.thumbnail ?? IMAGES.noCover}
                     alt={volumeInfo?.title ?? BOOKDEFAULTS.imageAlt}
                     className={styles["book-image"]}
                 />

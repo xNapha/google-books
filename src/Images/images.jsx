@@ -6,6 +6,7 @@ const IMAGES = {
     starFilled: new URL("./star-filled.svg", import.meta.url).href,
     starHollow: new URL("./star-hollow.svg", import.meta.url).href,
     exit: new URL("./x-mark.svg", import.meta.url).href,
+    noCover: new URL("./default_book.jpg", import.meta.url).href,
 };
 
 export default IMAGES;
