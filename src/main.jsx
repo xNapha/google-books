@@ -8,13 +8,15 @@ import { BrowserRouter, HashRouter } from "react-router-dom";
 import FavouritesProvider from "./contexts/FavouritesProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <HashRouter>
-        <BookProvider>
-            <SearchQueryProvider>
-                <FavouritesProvider>
-                    <App />
-                </FavouritesProvider>
-            </SearchQueryProvider>
-        </BookProvider>
-    </HashRouter>
+    <React.StrictMode>
+        <BrowserRouter>
+            <BookProvider>
+                <SearchQueryProvider>
+                    <FavouritesProvider>
+                        <App />
+                    </FavouritesProvider>
+                </SearchQueryProvider>
+            </BookProvider>
+        </BrowserRouter>
+    </React.StrictMode>
 );
