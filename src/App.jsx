@@ -6,7 +6,7 @@ import FavouritesPage from "./containers/FavouritesPage/FavouritesPage.jsx";
 const App = () => {
     return (
         <Routes>
-            <Route path="/google-books/" element={<HomePage />} />
+            <Route path="/google-books" element={<HomePage />} />
             <Route path="/google-books/:search" element={<SearchPage />} />
             <Route
                 path="/google-books/favourites"
