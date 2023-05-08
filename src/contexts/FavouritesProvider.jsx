@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 export const FavouritesContext = createContext();
 const FavouritesProvider = ({ children }) => {
-    if (!localStorage.googleBooks) {
-        localStorage.setItem("googleBooks", JSON.stringify([]));
-    }
-    const localStorageBooks = JSON.parse(localStorage.getItem("googleBooks"));
-    const [favouriteBooks, setFavouriteBooks] = useState(localStorageBooks);
+    const [favouriteBooks, setFavouriteBooks] = useState([]);
     const [filteredFavouriteBooks, setFilteredFavouriteBooks] = useState([]);
     const [filteredSearchTerm, setFilteredSearchTerm] = useState("");
     const value = {
@@ -19,8 +15,17 @@ const FavouritesProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        localStorage.setItem("googleBooks", JSON.parse(favourites));
-    }, [favourites]);
+        if (!localStorage.googleBooks) {
+            localStorage.setItem("googleBooks", JSON.stringify([]));
+        }
+        const localStorageBooks = JSON.parse(
+            localStorage.getItem("googleBooks")
+        );
+        setFavouriteBooks(localStorageBooks);
+    }, []);
+    useEffect(() => {
+        localStorage.setItem("googleBooks", JSON.stringify(favouriteBooks));
+    }, [favouriteBooks]);
 
     return (
         <FavouritesContext.Provider value={value}>

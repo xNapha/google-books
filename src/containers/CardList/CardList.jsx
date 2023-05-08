@@ -4,6 +4,7 @@ import Card from "../../components/Card/Card.jsx";
 import styles from "./CardList.module.scss";
 import LoadMore from "../../components/LoadMore/LoadMore.jsx";
 import removeDuplicateBooks from "../../services/removeDuplicateBooks.js";
+import IMAGES from "../../Images/images.jsx";
 
 const CardList = () => {
     const { searchedBooks } = useContext(SearchQueryContext);
@@ -19,7 +20,7 @@ const CardList = () => {
                 key={book.id}
                 title={book.volumeInfo?.title ?? ""}
                 authors={book.volumeInfo?.authors ?? []}
-                image={book.volumeInfo?.imageLinks?.thumbnail ?? ""}
+                image={book.volumeInfo?.imageLinks?.thumbnail ?? IMAGES.noCover}
                 description={book.volumeInfo?.description}
                 book={book}
             />

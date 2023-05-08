@@ -6,6 +6,7 @@ import styles from "./Favourites.module.scss";
 import { BookContext } from "../../contexts/BookProvider.jsx";
 import DedicatedBook from "../DedicatedBook/DedicatedBook.jsx";
 import removeDuplicateBooks from "../../services/removeDuplicateBooks.js";
+import IMAGES from "../../Images/images.jsx";
 
 const Favourites = () => {
     const {
@@ -21,10 +22,13 @@ const Favourites = () => {
             return (
                 <Card
                     key={filteredBook.id}
-                    title={filteredBook.volumeInfo.title}
-                    authors={filteredBook.volumeInfo.authors}
-                    image={filteredBook.volumeInfo.imageLinks.thumbnail}
-                    description={filteredBook.volumeInfo.description}
+                    title={filteredBook.volumeInfo.title ?? ""}
+                    authors={filteredBook.volumeInfo.authors ?? []}
+                    image={
+                        filteredBook?.volumeInfo?.imageLinks?.thumbnail ??
+                        IMAGES.noCover
+                    }
+                    description={filteredBook.volumeInfo.description ?? ""}
                     book={filteredBook}
                 />
             );
@@ -34,25 +38,27 @@ const Favourites = () => {
         setFilteredFavouriteBooks([...favouriteBooks]);
     }, [favouriteBooks]);
 
-    const checkForFavouriteBooks = () => {
-        let content = createContent;
+    const checkForFavouriteBooks = (createContent) => {
+        console.log(createContent);
         if (favouriteBooks.length > 0 && filteredFavouriteBooks.length === 0) {
-            content = (
+            return (
                 <p>
                     No books that include {filteredSearchTerm}, were found in
                     your favourites
                 </p>
             );
         } else if (favouriteBooks.length === 0) {
-            content = <p>No favourite books assigned</p>;
+            return <p>No favourite books assigned</p>;
         }
-        return content;
+        return createContent;
     };
 
     return (
         <div>
             <NavigationBar favouritesPage={true} />
-            <div className={styles.Favourites}>{checkForFavouriteBooks()}</div>
+            <div className={styles.Favourites}>
+                {checkForFavouriteBooks(createContent)}
+            </div>
             {singleBook && <DedicatedBook favouritesPage={true} />}
         </div>
     );

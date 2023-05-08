@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./Card.module.scss";
 import { BookContext } from "../../contexts/BookProvider.jsx";
 import IMAGES from "../../Images/images";
+
 const Card = ({ title, authors, image, book, description }) => {
     const { setSingleBook } = useContext(BookContext);
     const [cardVisibility, setCardVisibility] = useState(false);
@@ -63,5 +64,7 @@ const Card = ({ title, authors, image, book, description }) => {
 export default Card;
 
 const DEFAULTS = {
-    image: "../src/assets/default_book.jpg",
+    title: "No title could be found for this book",
+    authors: "No authors could be found for this book",
+    description: "No description could be found for this book",
 };

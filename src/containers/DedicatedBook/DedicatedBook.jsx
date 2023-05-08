@@ -8,12 +8,12 @@ import { SearchQueryContext } from "../../contexts/SearchQueryProvider.jsx";
 import IMAGES from "../../Images/images";
 const DedicatedBook = () => {
     const { singleBook, setSingleBook } = useContext(BookContext);
-    const { bookSearch, setBookSearch } = useContext(SearchQueryContext);
+    const { searchedBooks, setSearchedBooks } = useContext(SearchQueryContext);
     const { favouriteBooks, setFavouriteBooks } = useContext(FavouritesContext);
     const { volumeInfo } = singleBook;
     const handleClick = () => {
         checkFavourites(favouriteBooks, setFavouriteBooks, singleBook);
-        setBookSearch([...bookSearch]);
+        setSearchedBooks([...searchedBooks]);
     };
 
     const applyStyle = (style) => {
