@@ -62,9 +62,3 @@ const Card = ({ title, authors, image, book, description }) => {
 };
 
 export default Card;
-
-const DEFAULTS = {
-    title: "No title could be found for this book",
-    authors: "No authors could be found for this book",
-    description: "No description could be found for this book",
-};
